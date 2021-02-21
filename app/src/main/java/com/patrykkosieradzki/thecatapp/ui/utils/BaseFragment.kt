@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.observe
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.hadilq.liveevent.LiveEvent
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -121,9 +122,9 @@ fun LiveEvent<Unit>.fireEvent() {
 //    this.addTextChangedListener { update(it.toString()) }
 //}
 
-//fun Fragment.navigateTo(directions: NavDirections) {
-//    findNavController().navigate(directions)
-//}
+fun Fragment.navigateTo(directions: NavDirections) {
+    findNavController().navigate(directions)
+}
 
 val Fragment.appCompatActivity: AppCompatActivity
     get() = requireActivity() as AppCompatActivity

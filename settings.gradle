@@ -1,2 +1,2 @@
-include ':app', ':domain'
+include ':app', ':domain', ':network'
 rootProject.name='TheCatApp'

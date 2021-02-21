@@ -15,6 +15,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.hadilq.liveevent.LiveEvent
 import com.nhaarman.mockitokotlin2.mock
+import com.patrykkosieradzki.thecatapp.ActivityForTestingFragment
 import com.patrykkosieradzki.thecatapp.R
 import com.patrykkosieradzki.thecatapp.ui.utils.BaseFragment
 import com.patrykkosieradzki.thecatapp.ui.utils.BaseViewModel
@@ -25,6 +26,7 @@ import org.mockito.Answers
 import org.mockito.Mockito
 import org.mockito.invocation.InvocationOnMock
 import org.mockito.stubbing.Answer
+import kotlin.reflect.full.isSubclassOf
 
 fun fragmentTestRuleWithMocks(usesIntents: Boolean = false, stubbing: () -> Unit = {}) =
     object : FragmentTestRule(usesIntents) {
