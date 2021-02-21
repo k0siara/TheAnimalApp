@@ -4,13 +4,14 @@ import com.hadilq.liveevent.LiveEvent
 import com.patrykkosieradzki.domain.usecases.GetRandomCatUrlUseCase
 import com.patrykkosieradzki.thecatapp.ui.utils.BaseViewModel
 import com.patrykkosieradzki.thecatapp.ui.utils.ViewState
+import com.patrykkosieradzki.thecatapp.ui.utils.fireEvent
 
 class RandomCatViewModel(
     private val getRandomCatUrlUseCase: GetRandomCatUrlUseCase
 ) : BaseViewModel<RandomCatViewState>(
     initialState = RandomCatViewState(inProgress = true)
 ) {
-    val loadRandomCatEvent = LiveEvent<Unit>()
+    val catLoadedEvent = LiveEvent<String>()
 
     override fun initialize() {
         loadRandomCat()
@@ -19,7 +20,13 @@ class RandomCatViewModel(
     fun loadRandomCat() {
         safeLaunch {
             val catUrl = getRandomCatUrlUseCase.invoke()
+            catLoadedEvent.fireEvent(catUrl)
         }
+    }
+
+    fun onLoadMoreButtonClicked() {
+        println("click")
+        loadRandomCat()
     }
 }
 

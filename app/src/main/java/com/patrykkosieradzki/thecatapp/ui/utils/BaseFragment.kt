@@ -18,6 +18,7 @@ import androidx.lifecycle.observe
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.hadilq.liveevent.LiveEvent
+import com.patrykkosieradzki.thecatapp.BR
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
 import kotlin.reflect.KClass
@@ -51,7 +52,7 @@ abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : 
         binding = DataBindingUtil.inflate<VDB>(inflater, layoutId, container, false)
             .apply {
                 lifecycleOwner = viewLifecycleOwner
-//                setVariable(BR.vm, viewModel)
+                setVariable(BR.vm, viewModel)
             }
         return RelativeLayout(requireContext()).apply {
             layoutParams = RelativeLayout.LayoutParams(
