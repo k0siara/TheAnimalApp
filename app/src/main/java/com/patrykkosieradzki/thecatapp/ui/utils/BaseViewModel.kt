@@ -31,6 +31,12 @@ abstract class BaseViewModel<STATE : ViewState>(
 
     abstract fun initialize()
 
+    fun onBottomAppBarNavigationClicked() {}
+
+    fun onBottomAppBarSearchClicked() {}
+
+    fun onBottomAppBarMoreClicked() {}
+
     protected fun updateError(exception: Throwable): ErrorEvent {
         return ErrorEvent(exception, isInitialState && _viewState.valueNN.inProgress)
     }

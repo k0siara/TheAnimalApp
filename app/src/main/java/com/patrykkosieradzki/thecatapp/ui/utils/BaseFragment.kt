@@ -17,8 +17,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.observe
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.hadilq.liveevent.LiveEvent
 import com.patrykkosieradzki.thecatapp.BR
+import com.patrykkosieradzki.thecatapp.R
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
 import kotlin.reflect.KClass
@@ -97,7 +99,24 @@ abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : 
         }
     }
 
-    open fun setupViews(view: View) {}
+    open fun setupViews(view: View) {
+        view.findViewById<BottomAppBar>(R.id.bottom_app_bar).apply {
+            setNavigationOnClickListener { viewModel.onBottomAppBarNavigationClicked() }
+            setOnMenuItemClickListener {
+                when(it.itemId) {
+                    R.id.search -> {
+                        viewModel.onBottomAppBarSearchClicked()
+                        true
+                    }
+                    R.id.more -> {
+                        viewModel.onBottomAppBarMoreClicked()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }
+    }
 }
 
 interface ViewState {
