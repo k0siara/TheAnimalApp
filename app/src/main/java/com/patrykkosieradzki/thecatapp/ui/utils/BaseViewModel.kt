@@ -2,11 +2,13 @@ package com.patrykkosieradzki.thecatapp.ui.utils
 
 import androidx.lifecycle.*
 import com.hadilq.liveevent.LiveEvent
+import com.patrykkosieradzki.thecatapp.utils.AllOpen
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+@AllOpen
 abstract class BaseViewModel<STATE : ViewState>(
     private val initialState: STATE
 ) : ViewModel() {
@@ -29,9 +31,7 @@ abstract class BaseViewModel<STATE : ViewState>(
         }
     }
 
-    abstract fun initialize()
-
-    fun onBottomAppBarNavigationClicked() {}
+    open fun initialize() {}
 
     fun onBottomAppBarSearchClicked() {}
 

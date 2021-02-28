@@ -11,27 +11,32 @@ class RandomCatViewModel(
 ) : BaseViewModel<RandomCatViewState>(
     initialState = RandomCatViewState(inProgress = true)
 ) {
-    val catLoadedEvent = LiveEvent<String>()
+    val loadCatImageEvent = LiveEvent<String>()
 
     override fun initialize() {
         loadRandomCat()
     }
 
-    fun loadRandomCat() {
+    private fun loadRandomCat() {
+        updateViewState { it.copy(isImageLoadingVisible = true) }
         safeLaunch {
             val catUrl = getRandomCatUrlUseCase.invoke()
-            catLoadedEvent.fireEvent(catUrl)
+            loadCatImageEvent.fireEvent(catUrl)
         }
     }
 
     fun onLoadMoreButtonClicked() {
-        println("click")
         loadRandomCat()
+    }
+
+    fun onCatImageLoadedSuccessfully() {
+        updateViewState { it.copy(isImageLoadingVisible = false) }
     }
 }
 
 data class RandomCatViewState(
-    override val inProgress: Boolean
+    override val inProgress: Boolean,
+    val isImageLoadingVisible: Boolean = true
 ) : ViewState {
     override fun toSuccess() = copy(inProgress = false)
 }

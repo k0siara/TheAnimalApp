@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_cat_breeds"
+            android:icon="@drawable/ic_list"
+            android:title="List of cat breeds" />
+        <item
+            android:id="@+id/nav2"
+            android:icon="@drawable/ic_list"
+            android:title="Not implemented yet" />
+    </group>
+</menu>

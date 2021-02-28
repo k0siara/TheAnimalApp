@@ -2,6 +2,9 @@
 
 buildscript {
     apply from: 'versions.gradle'
+    ext {
+        versions.kotlin = '1.4.10'
+    }
     repositories {
         google()
         jcenter()
@@ -15,6 +18,9 @@ buildscript {
 }
 
 allprojects {
+    ext {
+        isIdeBuild = project.properties['android.injected.invoked.from.ide'] == 'true'
+    }
     repositories {
         google()
         jcenter()

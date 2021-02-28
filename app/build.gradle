@@ -1,19 +1,48 @@
+ext.enableScreenshotsInAndroidTests = gradle.startParameter.taskNames.size() > 0 &&
+        gradle.startParameter.taskNames.get(0) == "connectedDebugAndroidTest"
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin"
+    }
+}
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-allopen"
 apply plugin: 'kotlin-kapt'
-apply plugin: 'shot'
+
+def appId = "com.patrykkosieradzki.thecatapp"
 
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.patrykkosieradzki.thecatapp"
+        applicationId appId
         minSdkVersion 24
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunnerArguments clearPackageData: 'true'
+        testInstrumentationRunner "com.patrykkosieradzki.thecatapp.utils.ScreenshotsRunner"
+        if (project.ext.enableScreenshotsInAndroidTests == true) {
+            testInstrumentationRunnerArguments enableScreenshotsInAndroidTests: 'true'
+        }
+    }
+
+    testOptions {
+        if (project.ext.enableScreenshotsInAndroidTests == false) {
+            if (!isIdeBuild) {
+                execution 'ANDROIDX_TEST_ORCHESTRATOR'
+            }
+        }
+        animationsDisabled = true
     }
 
     buildTypes {
@@ -25,6 +54,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    adbOptions {
+        installOptions '-g', '-r'
     }
 
     dataBinding {
@@ -50,6 +83,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":network"))
+    implementation(project(":utils"))
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.google.android.material:material:1.3.0'
@@ -84,12 +118,20 @@ dependencies {
 
 
     // AndroidTests
-    androidTestImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0") {
+        exclude group: 'org.mockito'
+    }
     androidTestImplementation "com.google.truth:truth:1.1.2"
-    androidTestImplementation deps.koin_test
-    androidTestImplementation deps.espresso.core
-    androidTestImplementation deps.espresso.intents
-    androidTestImplementation deps.espresso.contrib
+    androidTestImplementation(deps.koin_test) {
+        exclude group: 'org.mockito'
+    }
+    androidTestImplementation 'org.mockito:mockito-android:3.8.0'
+    androidTestImplementation deps.espresso.values()
+    androidTestUtil 'androidx.test:orchestrator:1.3.0'
+    androidTestImplementation 'androidx.test:core:1.0.0'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test:rules:1.3.0'
 
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
@@ -97,5 +139,48 @@ dependencies {
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
 
+    implementation 'com.airbnb.android:lottie:3.6.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
+}
+
+allOpen {
+    annotation("com.patrykkosieradzki.thecatapp.utils.AllOpen")
+}
+
+def projectScreenshotsDirectory = "$projectDir/screenshots"
+def deviceScreenshotsDirectory = '/sdcard/Pictures/' + appId + '/debug/screenshots'
+
+def clearScreenshotsTask = task('clearScreenshots', type: Exec) {
+    println deviceScreenshotsDirectory
+    executable "${android.getAdbExe().toString()}"
+    args 'shell', 'rm', '-r', deviceScreenshotsDirectory
+}
+
+def createScreenshotDirectoryTask = task('createScreenshotDirectory', type: Exec, group: 'reporting') {
+    executable "${android.getAdbExe().toString()}"
+    args 'shell', 'mkdir', '-p', deviceScreenshotsDirectory
+}
+
+def fetchScreenshotsTask = task('fetchScreenshots', type: Exec, group: 'reporting') {
+    executable "${android.getAdbExe().toString()}"
+    args 'pull', deviceScreenshotsDirectory + '/.', projectScreenshotsDirectory
+    finalizedBy {
+        clearScreenshotsTask
+    }
+
+    dependsOn {
+        createScreenshotDirectoryTask
+    }
+
+    doFirst {
+        new File(projectScreenshotsDirectory).mkdirs()
+    }
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name == 'connectedDebugAndroidTest') {
+        task.finalizedBy {
+            fetchScreenshotsTask
+        }
+    }
 }

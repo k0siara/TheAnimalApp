@@ -1,2 +1,3 @@
+include ':utils'
 include ':app', ':domain', ':network'
 rootProject.name='TheCatApp'
