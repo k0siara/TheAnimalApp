@@ -1,3 +1,6 @@
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 ext.enableScreenshotsInAndroidTests = gradle.startParameter.taskNames.size() > 0 &&
         gradle.startParameter.taskNames.get(0) == "connectedDebugAndroidTest"
 
@@ -17,7 +20,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-allopen"
 apply plugin: 'kotlin-kapt'
 
-def appId = "com.patrykkosieradzki.thecatapp"
+def appId = "com.patrykkosieradzki.theanimalapp"
 
 android {
     compileSdkVersion 29
@@ -30,7 +33,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunnerArguments clearPackageData: 'true'
-        testInstrumentationRunner "com.patrykkosieradzki.thecatapp.utils.ScreenshotsRunner"
+        testInstrumentationRunner "com.patrykkosieradzki.theanimalapp.utils.ScreenshotsRunner"
         if (project.ext.enableScreenshotsInAndroidTests == true) {
             testInstrumentationRunnerArguments enableScreenshotsInAndroidTests: 'true'
         }
@@ -47,12 +50,27 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "API_URL", "\"https://api.thecatapi.com/v1/\""
+            applicationIdSuffix ".debug"
+            debuggable true
         }
 
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "animals"
+    productFlavors {
+        cats {
+            dimension "animals"
+//            applicationIdSuffix ".cats"
+            buildConfigField "String", "API_URL", "\"https://api.thecatapi.com/v1/\""
+        }
+        dogs {
+            dimension "animals"
+//            applicationIdSuffix ".dogs"
+            buildConfigField "String", "API_URL", "\"https://api.thedogapi.com/v1/\""
         }
     }
 
@@ -71,6 +89,18 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    sourceSets {
+        cats {
+            res {
+                srcDirs 'src\\cats\\res'
+            }
+        }
+        dogs {
+            res {
+                srcDirs 'src\\dogs\\res'
+            }
+        }
     }
 }
 
@@ -144,14 +174,25 @@ dependencies {
 }
 
 allOpen {
-    annotation("com.patrykkosieradzki.thecatapp.utils.AllOpen")
+    annotation("com.patrykkosieradzki.theanimalapp.utils.AllOpen")
+}
+
+def getScreenshotsTestFlavor() {
+    if (gradle.startParameter.taskNames.size() > 0) {
+        switch (gradle.startParameter.taskNames.get(0)) {
+            case "connectedCatsDebugAndroidTest": return "cats"
+            case "connectedDogsDebugAndroidTest": return "dogs"
+            default: return "UNKNOWN_FLAVOR"
+        }
+    }
+
+    return "UNKNOWN_FLAVOR"
 }
 
 def projectScreenshotsDirectory = "$projectDir/screenshots"
-def deviceScreenshotsDirectory = '/sdcard/Pictures/' + appId + '/debug/screenshots'
+def deviceScreenshotsDirectory = '/sdcard/Pictures/' + appId + "/debug/screenshots/$screenshotsTestFlavor"
 
 def clearScreenshotsTask = task('clearScreenshots', type: Exec) {
-    println deviceScreenshotsDirectory
     executable "${android.getAdbExe().toString()}"
     args 'shell', 'rm', '-r', deviceScreenshotsDirectory
 }

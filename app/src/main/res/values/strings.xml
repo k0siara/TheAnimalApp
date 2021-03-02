@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">TheCatApp</string>
-
     <string name="search">Search</string>
     <string name="content_description_search">Search for something</string>
 

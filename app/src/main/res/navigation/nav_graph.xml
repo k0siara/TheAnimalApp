@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/randomCatFragment"
-        tools:layout="@layout/random_cat_fragment"
-        android:name="com.patrykkosieradzki.thecatapp.ui.randomcat.RandomCatFragment"
+        tools:layout="@layout/random_animal_fragment"
+        android:name="com.patrykkosieradzki.theanimalapp.ui.randomanimal.RandomAnimalFragment"
         android:label="RandomCatFragment" />
 </navigation>
