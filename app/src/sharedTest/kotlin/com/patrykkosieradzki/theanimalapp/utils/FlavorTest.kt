@@ -2,7 +2,7 @@ package com.patrykkosieradzki.theanimalapp.utils
 
 @Target(AnnotationTarget.FUNCTION, AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class TestForFlavors(
+annotation class FlavorTest(
     val flavors: Array<String> = [CATS, DOGS]
 )
 

@@ -6,12 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.hadilq.liveevent.LiveEvent
 import com.nhaarman.mockitokotlin2.mock
 import com.patrykkosieradzki.theanimalapp.ui.utils.ViewState
+import kotlin.reflect.full.isSubclassOf
 import org.koin.test.mock.MockProviderRule
 import org.mockito.Answers
 import org.mockito.Mockito
 import org.mockito.invocation.InvocationOnMock
 import org.mockito.stubbing.Answer
-import kotlin.reflect.full.isSubclassOf
 
 inline fun <reified VM : ViewModel, reified VS : ViewState> mockViewModelRule(
     defaultViewState: VS

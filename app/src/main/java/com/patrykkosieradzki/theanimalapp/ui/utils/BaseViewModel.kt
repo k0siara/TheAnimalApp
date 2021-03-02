@@ -31,7 +31,7 @@ abstract class BaseViewModel<STATE : ViewState>(
         }
     }
 
-    open fun initialize() {}
+    fun initialize() {}
 
     fun onBottomAppBarSearchClicked() {}
 
