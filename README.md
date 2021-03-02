@@ -1,11 +1,10 @@
 # TheAnimalApp
 
 Multiflavored Android Project, producing two apps at the same time:
-- TheCatApp
+- TheCatApp (using [TheCatAPI](https://thecatapi.com/))
+- TheDogApp (using [TheDogAPI](https://thecatapi.com/))
 
-- TheDogApp
-
-
+Modern Android Development example :smile:
 
 # License
 
