@@ -6,6 +6,19 @@ Multiflavored Android Project, producing two apps at the same time:
 
 Modern Android Development example :smile:
 
+## Architecture
+- Clean Architecture
+- MVI
+
+## Stack
+- Kotlin
+- Coroutines
+- Architecture Components
+    * ViewModel
+    * LiveData
+    * Navigation Components
+- Koin (Dependency Injection)
+
 # License
 
     Copyright 2020 Patryk Marciszek-Kosieradzki
