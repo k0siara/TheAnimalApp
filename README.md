@@ -8,6 +8,7 @@ Modern Android Development example :smile:
 
 ## Architecture
 - Clean Architecture
+- MVVM
 - MVI
 
 ## Stack
