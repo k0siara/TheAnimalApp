@@ -2,7 +2,7 @@ def kotlin_version = '1.4.30'
 ext.versions = [
         kotlin                  :   "$kotlin_version",
         kotlin_jdk8             :   "jdk8-$kotlin_version",
-        android_gradle_plugin   :   "3.5.4",
+        android_gradle_plugin   : '4.1.1',
         shot                    :   "5.7.0",
         koin                    :   "2.2.2",
         lifecycle               :   "2.3.0",

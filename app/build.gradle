@@ -17,6 +17,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "kotlin-allopen"
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 def appId = "com.patrykkosieradzki.theanimalapp"
 
@@ -48,7 +50,6 @@ android {
 
     buildTypes {
         debug {
-            applicationIdSuffix ".debug"
             debuggable true
         }
 
@@ -62,12 +63,12 @@ android {
     productFlavors {
         cats {
             dimension "animals"
-//            applicationIdSuffix ".cats"
+            applicationIdSuffix ".cats"
             buildConfigField "String", "API_URL", "\"https://api.thecatapi.com/v1/\""
         }
         dogs {
             dimension "animals"
-//            applicationIdSuffix ".dogs"
+            applicationIdSuffix ".dogs"
             buildConfigField "String", "API_URL", "\"https://api.thedogapi.com/v1/\""
         }
     }
@@ -177,7 +178,12 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
 
     def paging_version = "3.0.0-beta01"
-    implementation "androidx.paging:paging-runtime:$paging_version"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:26.6.0')
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }
 
 allOpen {

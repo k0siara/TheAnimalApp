@@ -1,5 +1,7 @@
 package com.patrykkosieradzki.theanimalapp.ui.randomanimal
 
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import com.hadilq.liveevent.LiveEvent
 import com.patrykkosieradzki.theanimalapp.domain.usecases.GetRandomAnimalUrlUseCase
 import com.patrykkosieradzki.theanimalapp.ui.utils.BaseViewModel
@@ -27,6 +29,7 @@ class RandomAnimalViewModel(
 
     fun onLoadMoreButtonClicked() {
         loadRandomAnimal()
+        throw RuntimeException("Test error")
     }
 
     fun onAnimalImageLoadedSuccessfully() {
