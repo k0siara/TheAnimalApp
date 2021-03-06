@@ -29,7 +29,6 @@ class RandomAnimalViewModel(
 
     fun onLoadMoreButtonClicked() {
         loadRandomAnimal()
-        throw RuntimeException("Test error")
     }
 
     fun onAnimalImageLoadedSuccessfully() {

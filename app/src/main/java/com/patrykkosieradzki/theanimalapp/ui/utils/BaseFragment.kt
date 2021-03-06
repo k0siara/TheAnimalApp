@@ -76,7 +76,7 @@ abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : 
     }
 
     open fun setupViews(view: View) {
-        view.findViewById<BottomAppBar>(R.id.bottom_app_bar).apply {
+        view.findViewById<BottomAppBar>(R.id.bottom_app_bar)?.apply {
             setNavigationOnClickListener {
                 val bottomNavDrawerFragment = BottomNavigationDrawerFragment()
                 bottomNavDrawerFragment.show(parentFragmentManager, bottomNavDrawerFragment.tag)

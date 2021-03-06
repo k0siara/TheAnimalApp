@@ -3,11 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/randomCatFragment">
+    app:startDestination="@id/launcherFragment">
 
+    <fragment
+        android:id="@+id/launcherFragment"
+        tools:layout="@layout/launcher_fragment"
+        android:name="com.patrykkosieradzki.theanimalapp.ui.launcher.LauncherFragment"
+        android:label="LauncherFragment" >
+        <action
+            android:id="@+id/to_randomCatFragment"
+            app:destination="@id/randomCatFragment" />
+        <action
+            android:id="@+id/to_maintenanceFragment"
+            app:destination="@id/maintenanceFragment" />
+    </fragment>
     <fragment
         android:id="@+id/randomCatFragment"
         tools:layout="@layout/random_animal_fragment"
         android:name="com.patrykkosieradzki.theanimalapp.ui.randomanimal.RandomAnimalFragment"
         android:label="RandomCatFragment" />
+
+    <fragment
+        android:id="@+id/maintenanceFragment"
+        tools:layout="@layout/maintenance_fragment"
+        android:name="com.patrykkosieradzki.theanimalapp.ui.maintenance.MaintenanceFragment"
+        android:label="MaintenanceFragment" />
 </navigation>

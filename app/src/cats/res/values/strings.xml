@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TheCatApp</string>
+    <string name="loading">Meowing…</string>
 
     <string name="random_animal_image_title">Random cat image</string>
 
