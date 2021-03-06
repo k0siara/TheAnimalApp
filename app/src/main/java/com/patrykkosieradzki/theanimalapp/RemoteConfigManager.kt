@@ -48,7 +48,7 @@ class RemoteConfigManagerImpl(
             fetchTimeoutInSeconds = FETCH_TIMEOUT_IN_SECONDS
         }
         remoteConfig.setConfigSettingsAsync(remoteConfigSettings).addOnCompleteListener {
-            remoteConfig.fetch(minimumFetchIntervalInSeconds)
+            remoteConfig.fetchAndActivate()
                 .addOnCompleteListener {
                     Timber.d("Remote Config fetched successfully")
                     onCompleteCallback.invoke(maintenanceEnabled)
