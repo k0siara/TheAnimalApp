@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>is_maintenance_mode</key>
+        <value>false</value>
+    </entry>
+    <entry>
+        <key>maintenance_title</key>
+        <value>We are on a break</value>
+    </entry>
+    <entry>
+        <key>maintenance_description</key>
+        <value>We are doing some work</value>
+    </entry>
+</defaultsMap>
