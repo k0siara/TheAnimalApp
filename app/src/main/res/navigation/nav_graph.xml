@@ -16,6 +16,12 @@
         <action
             android:id="@+id/to_maintenanceFragment"
             app:destination="@id/maintenanceFragment" />
+        <action
+            android:id="@+id/to_allAnimalsFragment"
+            app:destination="@id/allAnimalsFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/randomCatFragment"
@@ -32,4 +38,9 @@
             android:name="maintenanceData"
             app:argType="com.patrykkosieradzki.theanimalapp.ui.maintenance.MaintenanceData" />
     </fragment>
+    <fragment
+        android:id="@+id/allAnimalsFragment"
+        tools:layout="@layout/all_animals_fragment"
+        android:name="com.patrykkosieradzki.theanimalapp.ui.allanimals.AllAnimalsFragment"
+        android:label="AllAnimalsFragment" />
 </navigation>

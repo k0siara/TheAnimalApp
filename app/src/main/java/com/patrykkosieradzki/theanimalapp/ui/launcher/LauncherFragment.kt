@@ -18,7 +18,7 @@ class LauncherFragment :
                 navigateTo(directions)
             }
             goToDesktopEvent.observe(viewLifecycleOwner) {
-                val directions = LauncherFragmentDirections.toRandomCatFragment()
+                val directions = LauncherFragmentDirections.toAllAnimalsFragment()
                 navigateTo(directions)
             }
         }

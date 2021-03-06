@@ -15,7 +15,7 @@ class MaintenanceFragment :
 
     override fun setupViews(view: View) {
         super.setupViews(view)
-
+        onBackEvent = { requireActivity().moveTaskToBack(true) }
         viewModel.setData(args.maintenanceData)
     }
 }
