@@ -27,5 +27,9 @@
         android:id="@+id/maintenanceFragment"
         tools:layout="@layout/maintenance_fragment"
         android:name="com.patrykkosieradzki.theanimalapp.ui.maintenance.MaintenanceFragment"
-        android:label="MaintenanceFragment" />
+        android:label="MaintenanceFragment" >
+        <argument
+            android:name="maintenanceData"
+            app:argType="com.patrykkosieradzki.theanimalapp.ui.maintenance.MaintenanceData" />
+    </fragment>
 </navigation>

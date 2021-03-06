@@ -20,7 +20,9 @@ val appModule = module {
     }
 
     single {
-        RemoteConfigManagerImpl()
+        RemoteConfigManagerImpl(
+            appConfiguration = get()
+        )
     } bind RemoteConfigManager::class
 
     factory<GetRandomAnimalUrlUseCase> {
@@ -28,7 +30,9 @@ val appModule = module {
     }
 
     viewModel {
-        LauncherViewModel()
+        LauncherViewModel(
+            remoteConfigManager = get()
+        )
     }
 
     viewModel {
