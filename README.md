@@ -20,6 +20,11 @@ Modern Android Development example :smile:
     * Navigation Components
 - Koin (Dependency Injection)
 
+## Firebase
+- Analytics
+- Crashlytics
+- Remote Config
+
 # License
 
     Copyright 2020 Patryk Marciszek-Kosieradzki
