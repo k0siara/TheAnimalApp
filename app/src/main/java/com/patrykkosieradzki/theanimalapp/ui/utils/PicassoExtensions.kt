@@ -10,13 +10,16 @@ fun loadWithPicasso(
     onSuccess: () -> Unit = {},
     onError: () -> Unit = {}
 ) {
-    Picasso.get().load(url).into(into, object : Callback {
-        override fun onSuccess() {
-            onSuccess.invoke()
-        }
+    Picasso.get().load(url).into(
+        into,
+        object : Callback {
+            override fun onSuccess() {
+                onSuccess.invoke()
+            }
 
-        override fun onError(e: Exception?) {
-            onError.invoke()
+            override fun onError(e: Exception?) {
+                onError.invoke()
+            }
         }
-    })
+    )
 }

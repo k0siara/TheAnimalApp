@@ -15,6 +15,9 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:1.11.0")
 
     implementation deps.koin.koin_android
+
+    implementation group: 'org.slf4j', name: 'slf4j-android', version: '1.7.21'
+    implementation 'io.github.microutils:kotlin-logging:1.12.0'
 }
 
 sourceCompatibility = "8"

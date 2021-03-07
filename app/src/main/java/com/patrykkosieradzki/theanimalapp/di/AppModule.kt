@@ -4,6 +4,8 @@ import com.patrykkosieradzki.theanimalapp.RemoteConfigManager
 import com.patrykkosieradzki.theanimalapp.RemoteConfigManagerImpl
 import com.patrykkosieradzki.theanimalapp.TheAnimalAppConfiguration
 import com.patrykkosieradzki.theanimalapp.domain.AppConfiguration
+import com.patrykkosieradzki.theanimalapp.domain.usecases.GetAnimalsUseCase
+import com.patrykkosieradzki.theanimalapp.domain.usecases.GetAnimalsUseCaseImpl
 import com.patrykkosieradzki.theanimalapp.domain.usecases.GetRandomAnimalUrlUseCase
 import com.patrykkosieradzki.theanimalapp.domain.usecases.GetRandomAnimalUrlUseCaseImpl
 import com.patrykkosieradzki.theanimalapp.ui.allanimals.AllAnimalsViewModel
@@ -27,7 +29,15 @@ val appModule = module {
     } bind RemoteConfigManager::class
 
     factory<GetRandomAnimalUrlUseCase> {
-        GetRandomAnimalUrlUseCaseImpl(get())
+        GetRandomAnimalUrlUseCaseImpl(
+            animalRepository = get()
+        )
+    }
+
+    factory<GetAnimalsUseCase> {
+        GetAnimalsUseCaseImpl(
+            animalRepository = get()
+        )
     }
 
     viewModel {
@@ -41,10 +51,14 @@ val appModule = module {
     }
 
     viewModel {
-        RandomAnimalViewModel(get())
+        RandomAnimalViewModel(
+            getRandomAnimalUrlUseCase = get()
+        )
     }
 
     viewModel {
-        AllAnimalsViewModel()
+        AllAnimalsViewModel(
+            getAnimalsUseCase = get()
+        )
     }
 }

@@ -4,4 +4,6 @@
     <string name="loading">Barking…</string>
 
     <string name="random_animal_image_title">Random dog image</string>
+
+    <string name="all_animals_title">All photos of dogs</string>
 </resources>

@@ -4,6 +4,8 @@ import com.patrykkosieradzki.theanimalapp.domain.AppConfiguration
 import com.patrykkosieradzki.theanimalapp.domain.repositories.AnimalRepository
 import com.patrykkosieradzki.theanimalapp.network.repositories.AnimalApiRepository
 import com.patrykkosieradzki.theanimalapp.network.services.AnimalApiService
+import com.patrykkosieradzki.theanimalapp.network.utils.ErrorHandlingCallAdapterFactory
+import com.patrykkosieradzki.theanimalapp.network.utils.NetworkHandler
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -28,8 +30,15 @@ val networkModule = module {
         Retrofit.Builder()
             .baseUrl(get<AppConfiguration>().baseUrl)
             .addConverterFactory(MoshiConverterFactory.create(get()))
+            .addCallAdapterFactory(ErrorHandlingCallAdapterFactory())
             .client(get())
             .build()
+    }
+
+    single {
+        NetworkHandler(
+            appConfiguration = get()
+        )
     }
 
     single<AnimalApiService> {
@@ -37,6 +46,9 @@ val networkModule = module {
     }
 
     single<AnimalRepository> {
-        AnimalApiRepository(get())
+        AnimalApiRepository(
+            animalApiService = get(),
+            networkHandler = get()
+        )
     }
 }
