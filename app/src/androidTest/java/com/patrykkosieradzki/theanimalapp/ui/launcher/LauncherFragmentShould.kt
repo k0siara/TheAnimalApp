@@ -1,4 +1,4 @@
-package com.patrykkosieradzki.theanimalapp.ui.randomanimal
+package com.patrykkosieradzki.theanimalapp.ui.launcher
 
 import com.patrykkosieradzki.theanimalapp.utils.CATS
 import com.patrykkosieradzki.theanimalapp.utils.FlavorTest
@@ -11,33 +11,33 @@ import org.junit.Rule
 import org.junit.Test
 import org.koin.test.mock.declareMock
 
-class RandomAnimalFragmentShould : RobotTest<RandomCatFragmentRobot>() {
+class LauncherFragmentShould : RobotTest<LauncherFragmentRobot>() {
 
     @get:Rule
-    val mockRule = mockViewModelRule<RandomAnimalViewModel, RandomAnimalViewState>(
-        defaultViewState = RandomAnimalViewState(
+    val mockRule = mockViewModelRule<LauncherViewModel, LauncherViewState>(
+        defaultViewState = LauncherViewState(
             inProgress = false
         )
     )
 
     @get:Rule
     val rule = fragmentTestRuleWithMocks {
-        declareMock<RandomAnimalViewModel>()
+        declareMock<LauncherViewModel>()
     }
 
     @Test
     @FlavorTest(flavors = [CATS])
-    fun showLoadingOfRandomCat() {
+    fun showCatLauncherScreen() {
         withRobot {
-            startFragment(RandomAnimalFragment())
+            startFragment(LauncherFragment())
             wait(1)
-            capture("02_Random_Cat_Screen_Loading")
+            capture("01_Launcher_Screen")
         }
     }
 
-    override fun createRobot() = RandomCatFragmentRobot(rule)
+    override fun createRobot() = LauncherFragmentRobot(rule)
 }
 
-class RandomCatFragmentRobot(
+class LauncherFragmentRobot(
     rule: FragmentTestRule
-) : FragmentRobot<RandomAnimalViewState, RandomAnimalViewModel>(rule)
+) : FragmentRobot<LauncherViewState, LauncherViewModel>(rule)
