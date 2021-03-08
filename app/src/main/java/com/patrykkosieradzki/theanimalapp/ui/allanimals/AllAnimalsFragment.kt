@@ -17,7 +17,9 @@ class AllAnimalsFragment :
         super.setupViews(view)
         onBackEvent = { requireActivity().moveTaskToBack(true) }
         adapter = AnimalsAdapter(AnimalDiffCallback())
-        binding.animalsRecyclerView.adapter = adapter
+        with(binding) {
+            animalsRecyclerView.adapter = adapter
+        }
         with(viewModel) {
             updateAnimalsEvent.observe(viewLifecycleOwner) {
                 lifecycleScope.launch {

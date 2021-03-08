@@ -208,8 +208,20 @@ def getScreenshotsTestFlavor() {
     return "UNKNOWN_FLAVOR"
 }
 
+def getScreenshotsAppId() {
+    if (gradle.startParameter.taskNames.size() > 0) {
+        switch (gradle.startParameter.taskNames.get(0)) {
+            case "connectedCatsDebugAndroidTest": return "com.patrykkosieradzki.theanimalapp.cats"
+            case "connectedDogsDebugAndroidTest": return "com.patrykkosieradzki.theanimalapp.dogs"
+            default: return "UNKNOWN_FLAVOR"
+        }
+    }
+
+    return "UNKNOWN_FLAVOR"
+}
+
 def projectScreenshotsDirectory = "$projectDir/screenshots"
-def deviceScreenshotsDirectory = '/sdcard/Pictures/' + appId + "/debug/screenshots/$screenshotsTestFlavor"
+def deviceScreenshotsDirectory = '/sdcard/Pictures/' + screenshotsAppId + "/debug/$screenshotsTestFlavor/screenshots"
 
 def clearScreenshotsTask = task('clearScreenshots', type: Exec) {
     executable "${android.getAdbExe().toString()}"
