@@ -31,7 +31,7 @@ class RandomAnimalFragmentShould : RobotTest<RandomCatFragmentRobot>() {
         withRobot {
             startFragment(RandomAnimalFragment())
             wait(1)
-            capture("02_Random_Cat_Screen_Loading")
+            capture("03_Random_Cat_Screen_Loading")
         }
     }
 

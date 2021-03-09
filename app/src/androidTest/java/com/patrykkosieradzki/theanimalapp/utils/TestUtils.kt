@@ -32,15 +32,15 @@ open class FragmentTestRule(usesIntents: Boolean) :
     )
 
 abstract class FragmentTest<
-        STATE : ViewState,
-        VM : BaseViewModel<STATE>,
-        R : FragmentRobot<STATE, VM>
-        > : RobotTest<R>()
+    STATE : ViewState,
+    VM : BaseViewModel<STATE>,
+    R : FragmentRobot<STATE, VM>
+    > : RobotTest<R>()
 
 open class FragmentRobot<
-        STATE : ViewState,
-        VM : BaseViewModel<STATE>
-        >(rule: FragmentTestRule) : BaseFragmentRobot<ActivityForTestingFragment>(
+    STATE : ViewState,
+    VM : BaseViewModel<STATE>
+    >(rule: FragmentTestRule) : BaseFragmentRobot<ActivityForTestingFragment>(
     rule,
     ActivityForTestingFragment::class.java,
     R.id.test_fragment
@@ -57,7 +57,7 @@ open class FragmentRobot<
         rule.activity.runOnUiThread {
             @Suppress("UNCHECKED_CAST")
             val fragment = rule.activity.supportFragmentManager.findFragmentById(R.id.test_fragment)
-                    as? BaseFragment<STATE, VM, ViewDataBinding>
+                as? BaseFragment<STATE, VM, ViewDataBinding>
             fragment?.let {
                 it.viewModel.action()
             }
@@ -69,8 +69,9 @@ open class BaseFragmentTestRule<T : AppCompatActivity>(
     private val usesIntents: Boolean,
     testActivity: Class<T>
 ) : ActivityTestRule<T>(
-    testActivity, true, false
-), KoinTest {
+        testActivity, true, false
+    ),
+    KoinTest {
 
     private var isInitialized: Boolean = false
 
@@ -154,4 +155,3 @@ open class BaseFragmentRobot<T : AppCompatActivity>(
         }
     }
 }
-

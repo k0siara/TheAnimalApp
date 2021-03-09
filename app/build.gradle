@@ -39,6 +39,9 @@ android {
         if (project.ext.enableScreenshotsInAndroidTests == true) {
             testInstrumentationRunnerArguments enableScreenshotsInAndroidTests: 'true'
         }
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
 
     testOptions {
@@ -190,6 +193,9 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    def fragment_version = "1.3.0"
+    debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
 }
 
 allOpen {
