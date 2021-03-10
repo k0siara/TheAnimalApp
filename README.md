@@ -39,7 +39,7 @@ Modern Android Development example :smile:
     * Using Screenshot and ScreenCaptureProcessor to capture screenshots
     * Created custom gradle tasks for pulling screenshots from the device
 
-## Screenshots
+## Screenshots (see all of them [here](app/screenshots))
 | Launcher Screen      | Maintenance Screen      | Random Cat Screen      |
 |------------|-------------|-------------|
 | <img src="app/screenshots/01_Launcher_Screen.png" width="250"> | <img src="app/screenshots/02_Maintenance_Screen.png" width="250"> | <img src="app/screenshots/03_Random_Cat_Screen_Loading.png" width="250"> |
