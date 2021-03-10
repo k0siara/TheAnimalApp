@@ -25,6 +25,25 @@ Modern Android Development example :smile:
 - Crashlytics
 - Remote Config
 
+## Testing
+- Unit tests
+    * ViewModel and Bussiness logic tests
+    * Junit 4 and 5
+    * Mockito-Kotlin
+    * Google Truth
+- UI tests
+    * Launching fragments using custom ActivityForTesting
+    * Using the newest fragment-testing library [launchFragmentInContainer<SomeFragment>(fragmentArgs)]
+    * Espresso
+- Screenshot tests
+    * Using Screenshot and ScreenCaptureProcessor to capture screenshots
+    * Created custom gradle tasks for pulling screenshots from the device
+
+## Screenshots
+| Launcher Screen      | Maintenance Screen      | Random Cat Screen      |
+|------------|-------------|-------------|
+| <img src="app/screenshots/01_Launcher_Screen.png" width="250"> | <img src="app/screenshots/02_Maintenance_Screen.png" width="250"> | <img src="app/screenshots/03_Random_Cat_Screen_Loading.png" width="250"> |
+
 # License
 
     Copyright 2020 Patryk Marciszek-Kosieradzki
