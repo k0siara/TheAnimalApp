@@ -9,6 +9,7 @@ import com.patrykkosieradzki.theanimalapp.domain.usecases.GetAnimalsUseCase
 import com.patrykkosieradzki.theanimalapp.ui.utils.BaseViewModel
 import com.patrykkosieradzki.theanimalapp.ui.utils.ViewState
 import com.patrykkosieradzki.theanimalapp.ui.utils.fireEvent
+import com.patrykkosieradzki.theanimalapp.ui.utils.valueNN
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 
@@ -37,13 +38,18 @@ class AllAnimalsViewModel(
         }
     }
 
+    fun updateGridMode() {
+        updateViewState { it.copy(isGridModeEnabled = !viewState.valueNN.isGridModeEnabled) }
+    }
+
     companion object {
         const val ANIMALS_PAGE_SIZE = 10
     }
 }
 
 data class AllAnimalsViewState(
-    override val inProgress: Boolean
+    override val inProgress: Boolean,
+    val isGridModeEnabled: Boolean = false
 ) : ViewState {
     override fun toSuccess() = copy(inProgress = false)
 }

@@ -4,4 +4,7 @@
 
     <string name="more">More</string>
     <string name="content_description_more">More</string>
+
+    <string name="list_to_grid_switch">Switch to grid</string>
+    <string name="list_to_grid_switch_description">Switch list view to grid view</string>
 </resources>

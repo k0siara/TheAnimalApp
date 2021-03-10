@@ -18,12 +18,11 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.hadilq.liveevent.LiveEvent
-import com.patrykkosieradzki.theanimalapp.R
 import com.patrykkosieradzki.theanimalapp.BR
+import com.patrykkosieradzki.theanimalapp.R
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
 import kotlin.reflect.KClass
-
 
 @Suppress("TooManyFunctions")
 abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : ViewDataBinding>(
@@ -82,7 +81,7 @@ abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : 
                 bottomNavDrawerFragment.show(parentFragmentManager, bottomNavDrawerFragment.tag)
             }
             setOnMenuItemClickListener {
-                when(it.itemId) {
+                when (it.itemId) {
                     R.id.search -> {
                         viewModel.onBottomAppBarSearchClicked()
                         true
