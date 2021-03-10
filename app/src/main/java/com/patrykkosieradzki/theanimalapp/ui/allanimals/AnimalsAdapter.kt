@@ -1,15 +1,18 @@
 package com.patrykkosieradzki.theanimalapp.ui.allanimals
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.patrykkosieradzki.theanimalapp.databinding.AnimalItemBinding
 import com.patrykkosieradzki.theanimalapp.domain.model.AnimalData
+import com.patrykkosieradzki.theanimalapp.ui.utils.setOnClick
 
 class AnimalsAdapter(
-    diffCallback: DiffUtil.ItemCallback<AnimalData>
+    diffCallback: DiffUtil.ItemCallback<AnimalData>,
+    private val onClick: (AnimalData) -> Unit
 ) : PagingDataAdapter<AnimalData, AnimalsAdapter.AnimalsViewHolder>(diffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalsViewHolder {
         val binding = AnimalItemBinding
@@ -19,14 +22,17 @@ class AnimalsAdapter(
 
     override fun onBindViewHolder(holder: AnimalsViewHolder, position: Int) {
         val item = getItem(position)
-        item?.let { holder.bind(it) }
+        item?.let {
+            holder.bind(it).setOnClick { onClick(it) }
+        }
     }
 
     inner class AnimalsViewHolder(
         private val binding: AnimalItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(animal: AnimalData) {
+        fun bind(animal: AnimalData): View {
             binding.animal = animal
+            return binding.root
         }
     }
 }

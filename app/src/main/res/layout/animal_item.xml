@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="animal"
             type="com.patrykkosieradzki.theanimalapp.domain.model.AnimalData" />

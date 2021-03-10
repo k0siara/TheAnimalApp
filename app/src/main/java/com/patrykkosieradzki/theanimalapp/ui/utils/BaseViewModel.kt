@@ -1,6 +1,10 @@
 package com.patrykkosieradzki.theanimalapp.ui.utils
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.hadilq.liveevent.LiveEvent
 import com.patrykkosieradzki.theanimalapp.utils.AllOpen
 import kotlinx.coroutines.CoroutineExceptionHandler
