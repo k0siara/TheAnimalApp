@@ -42,5 +42,20 @@
         android:id="@+id/allAnimalsFragment"
         tools:layout="@layout/all_animals_fragment"
         android:name="com.patrykkosieradzki.theanimalapp.ui.allanimals.AllAnimalsFragment"
-        android:label="AllAnimalsFragment" />
+        android:label="AllAnimalsFragment" >
+        <action
+            android:id="@+id/to_animalDetailsFragment"
+            app:destination="@id/animalDetailsFragment"
+            app:enterAnim="@anim/slide_in_from_right"
+            app:exitAnim="@anim/slide_out_to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/animalDetailsFragment"
+        tools:layout="@layout/animal_details_fragment"
+        android:name="com.patrykkosieradzki.theanimalapp.ui.animaldetails.AnimalDetailsFragment"
+        android:label="AnimalDetailsFragment" >
+        <argument
+            android:name="imageId"
+            app:argType="string" />
+    </fragment>
 </navigation>

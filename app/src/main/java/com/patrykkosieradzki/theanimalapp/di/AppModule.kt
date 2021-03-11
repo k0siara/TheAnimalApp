@@ -9,6 +9,7 @@ import com.patrykkosieradzki.theanimalapp.domain.usecases.GetAnimalsUseCaseImpl
 import com.patrykkosieradzki.theanimalapp.domain.usecases.GetRandomAnimalUrlUseCase
 import com.patrykkosieradzki.theanimalapp.domain.usecases.GetRandomAnimalUrlUseCaseImpl
 import com.patrykkosieradzki.theanimalapp.ui.allanimals.AllAnimalsViewModel
+import com.patrykkosieradzki.theanimalapp.ui.animaldetails.AnimalDetailsViewModel
 import com.patrykkosieradzki.theanimalapp.ui.launcher.LauncherViewModel
 import com.patrykkosieradzki.theanimalapp.ui.maintenance.MaintenanceViewModel
 import com.patrykkosieradzki.theanimalapp.ui.randomanimal.RandomAnimalViewModel
@@ -58,6 +59,12 @@ val appModule = module {
 
     viewModel {
         AllAnimalsViewModel(
+            getAnimalsUseCase = get()
+        )
+    }
+
+    viewModel {
+        AnimalDetailsViewModel(
             getAnimalsUseCase = get()
         )
     }

@@ -6,4 +6,5 @@
     <string name="random_animal_image_title">Random cat image</string>
 
     <string name="all_animals_title">All photos of cats</string>
+    <string name="animal_details_title">Cat details</string>
 </resources>

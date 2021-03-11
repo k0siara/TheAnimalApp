@@ -12,7 +12,7 @@ import com.patrykkosieradzki.theanimalapp.ui.utils.setOnClick
 
 class AnimalsAdapter(
     diffCallback: DiffUtil.ItemCallback<AnimalData>,
-    private val onClick: (AnimalData) -> Unit
+    private val onClick: (AnimalData) -> Unit = {}
 ) : PagingDataAdapter<AnimalData, AnimalsAdapter.AnimalsViewHolder>(diffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalsViewHolder {
         val binding = AnimalItemBinding
@@ -23,7 +23,7 @@ class AnimalsAdapter(
     override fun onBindViewHolder(holder: AnimalsViewHolder, position: Int) {
         val item = getItem(position)
         item?.let {
-            holder.bind(it).setOnClick { onClick(it) }
+            holder.bind(it).setOnClick { onClick(item) }
         }
     }
 
@@ -31,7 +31,7 @@ class AnimalsAdapter(
         private val binding: AnimalItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(animal: AnimalData): View {
-            binding.animal = animal
+            binding.item = animal
             return binding.root
         }
     }

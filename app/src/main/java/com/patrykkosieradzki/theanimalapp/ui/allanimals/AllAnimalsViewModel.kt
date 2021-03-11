@@ -1,8 +1,10 @@
 package com.patrykkosieradzki.theanimalapp.ui.allanimals
 
+import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.hadilq.liveevent.LiveEvent
 import com.patrykkosieradzki.theanimalapp.domain.model.AnimalData
 import com.patrykkosieradzki.theanimalapp.domain.usecases.GetAnimalsUseCase
@@ -20,7 +22,7 @@ class AllAnimalsViewModel(
     initialState = AllAnimalsViewState(inProgress = true)
 ) {
     val updateAnimalsEvent = LiveEvent<PagingData<AnimalData>>()
-    val showAnimalDetailsEvent = LiveEvent<AnimalData>()
+    val showAnimalDetailsEvent = LiveEvent<String>()
 
     val animals: Flow<PagingData<AnimalData>> = Pager(
         PagingConfig(
@@ -29,8 +31,8 @@ class AllAnimalsViewModel(
             initialLoadSize = ANIMALS_PAGE_SIZE,
             prefetchDistance = ANIMALS_PAGE_SIZE,
         ),
-        pagingSourceFactory = { AnimalsPagingSource(getAnimalsUseCase) }
-    ).flow
+        pagingSourceFactory = { AnimalsPagingSource(getAnimalsUseCase, startingPage = 0) }
+    ).flow.cachedIn(viewModelScope)
 
     override fun initialize() {
         safeLaunch {
@@ -46,8 +48,8 @@ class AllAnimalsViewModel(
         }
     }
 
-    fun onAnimalItemClicked(item: AnimalData) {
-        showAnimalDetailsEvent.fireEvent(item)
+    fun onAnimalItemClicked(animalData: AnimalData) {
+        showAnimalDetailsEvent.fireEvent(animalData.id)
     }
 
     companion object {

@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="animal"
+            name="item"
             type="com.patrykkosieradzki.theanimalapp.domain.model.AnimalData" />
     </data>
 
@@ -20,7 +20,7 @@
         app:cardCornerRadius="4dp">
 
         <ImageView
-            imageUrl="@{animal.url}"
+            imageUrl="@{item.url}"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:layout_gravity="center_horizontal"
