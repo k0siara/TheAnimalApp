@@ -1,5 +1,6 @@
 package com.patrykkosieradzki.theanimalapp.ui.allanimals
 
+import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -8,15 +9,18 @@ import com.patrykkosieradzki.theanimalapp.databinding.AllAnimalsFragmentBinding
 import com.patrykkosieradzki.theanimalapp.ui.allanimals.RecyclerViewMode.GRID
 import com.patrykkosieradzki.theanimalapp.ui.allanimals.RecyclerViewMode.LIST
 import com.patrykkosieradzki.theanimalapp.ui.utils.BaseFragment
+import com.patrykkosieradzki.theanimalapp.ui.utils.NavigationResult
 import com.patrykkosieradzki.theanimalapp.ui.utils.navigateTo
 import com.patrykkosieradzki.theanimalapp.ui.utils.removeItemDecorations
 import com.patrykkosieradzki.theanimalapp.ui.utils.valueNN
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class AllAnimalsFragment :
     BaseFragment<AllAnimalsViewState, AllAnimalsViewModel, AllAnimalsFragmentBinding>(
         R.layout.all_animals_fragment, AllAnimalsViewModel::class
-    ) {
+    ),
+    NavigationResult {
 
     lateinit var adapter: AnimalsAdapter
 
@@ -45,8 +49,8 @@ class AllAnimalsFragment :
                     adapter.submitData(it)
                 }
             }
-            showAnimalDetailsEvent.observe(viewLifecycleOwner) { imageId ->
-                val directions = AllAnimalsFragmentDirections.toAnimalDetailsFragment(imageId)
+            showAnimalDetailsEvent.observe(viewLifecycleOwner) { position ->
+                val directions = AllAnimalsFragmentDirections.toAnimalDetailsFragment(position)
                 navigateTo(directions)
             }
         }
@@ -73,6 +77,15 @@ class AllAnimalsFragment :
                     }
                 }
                 adapter?.notifyItemRangeChanged(0, adapter?.itemCount ?: 0)
+            }
+        }
+    }
+
+    override fun onNavigationResult(result: Bundle) {
+        Timber.d("Back navigation args received ${result["position"]}")
+        with(binding.animalsRecyclerView) {
+            post {
+                layoutManager?.scrollToPosition(result["position"] as Int)
             }
         }
     }

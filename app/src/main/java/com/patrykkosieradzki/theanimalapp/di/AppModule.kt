@@ -11,6 +11,8 @@ import com.patrykkosieradzki.theanimalapp.domain.usecases.GetRandomAnimalUrlUseC
 import com.patrykkosieradzki.theanimalapp.ui.allanimals.AllAnimalsViewModel
 import com.patrykkosieradzki.theanimalapp.ui.animaldetails.AnimalDetailsViewModel
 import com.patrykkosieradzki.theanimalapp.ui.launcher.LauncherViewModel
+import com.patrykkosieradzki.theanimalapp.ui.list.SharedAnimalFlowRepository
+import com.patrykkosieradzki.theanimalapp.ui.list.SharedPagingAnimalFlowRepository
 import com.patrykkosieradzki.theanimalapp.ui.maintenance.MaintenanceViewModel
 import com.patrykkosieradzki.theanimalapp.ui.randomanimal.RandomAnimalViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -41,6 +43,12 @@ val appModule = module {
         )
     }
 
+    single<SharedAnimalFlowRepository> {
+        SharedPagingAnimalFlowRepository(
+            getAnimalsUseCase = get()
+        )
+    }
+
     viewModel {
         LauncherViewModel(
             remoteConfigManager = get()
@@ -59,13 +67,13 @@ val appModule = module {
 
     viewModel {
         AllAnimalsViewModel(
-            getAnimalsUseCase = get()
+            sharedAnimalFlowRepository = get()
         )
     }
 
     viewModel {
         AnimalDetailsViewModel(
-            getAnimalsUseCase = get()
+            sharedAnimalFlowRepository = get()
         )
     }
 }

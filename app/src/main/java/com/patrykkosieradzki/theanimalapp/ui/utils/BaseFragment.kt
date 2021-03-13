@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.RelativeLayout
 import androidx.activity.addCallback
+import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavDirections
@@ -22,6 +24,7 @@ import com.patrykkosieradzki.theanimalapp.BR
 import com.patrykkosieradzki.theanimalapp.R
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
+import kotlin.properties.Delegates
 import kotlin.reflect.KClass
 
 @Suppress("TooManyFunctions")
@@ -94,6 +97,28 @@ abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : 
                 }
             }
         }
+    }
+
+    fun navigateBackWithResult(@IdRes destination: Int, bundle: Bundle): Boolean {
+        val childFragmentManager =
+            requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host)?.childFragmentManager
+        var backStackListener: FragmentManager.OnBackStackChangedListener by Delegates.notNull()
+        backStackListener = FragmentManager.OnBackStackChangedListener {
+            (childFragmentManager?.fragments?.get(0) as? NavigationResult)?.onNavigationResult(
+                bundle
+            )
+            childFragmentManager?.removeOnBackStackChangedListener(backStackListener)
+        }
+        childFragmentManager?.addOnBackStackChangedListener(backStackListener)
+        val backStackPopped = if (destination == -1) {
+            findNavController().popBackStack()
+        } else {
+            findNavController().popBackStack(destination, true)
+        }
+        if (!backStackPopped) {
+            childFragmentManager?.removeOnBackStackChangedListener(backStackListener)
+        }
+        return backStackPopped
     }
 }
 

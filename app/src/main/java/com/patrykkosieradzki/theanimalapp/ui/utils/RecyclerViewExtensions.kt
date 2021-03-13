@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat.getDrawable
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.DividerItemDecoration.HORIZONTAL
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 
 fun RecyclerView.addVerticalSeparator(@DrawableRes separatorDrawable: Int) {
@@ -35,4 +36,8 @@ fun RecyclerView.removeItemDecorations() {
     for (i in 0 until itemDecorationCount) {
         removeItemDecorationAt(i)
     }
+}
+
+fun RecyclerView.addPagerSnapHelper() {
+    PagerSnapHelper().attachToRecyclerView(this)
 }

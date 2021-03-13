@@ -1,42 +1,27 @@
 package com.patrykkosieradzki.theanimalapp.ui.allanimals
 
-import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.cachedIn
 import com.hadilq.liveevent.LiveEvent
 import com.patrykkosieradzki.theanimalapp.domain.model.AnimalData
-import com.patrykkosieradzki.theanimalapp.domain.usecases.GetAnimalsUseCase
 import com.patrykkosieradzki.theanimalapp.ui.allanimals.RecyclerViewMode.GRID
 import com.patrykkosieradzki.theanimalapp.ui.allanimals.RecyclerViewMode.LIST
+import com.patrykkosieradzki.theanimalapp.ui.list.SharedAnimalFlowRepository
 import com.patrykkosieradzki.theanimalapp.ui.utils.BaseViewModel
 import com.patrykkosieradzki.theanimalapp.ui.utils.ViewState
 import com.patrykkosieradzki.theanimalapp.ui.utils.fireEvent
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 
 class AllAnimalsViewModel(
-    private val getAnimalsUseCase: GetAnimalsUseCase
+    private val sharedAnimalFlowRepository: SharedAnimalFlowRepository
 ) : BaseViewModel<AllAnimalsViewState>(
     initialState = AllAnimalsViewState(inProgress = true)
 ) {
     val updateAnimalsEvent = LiveEvent<PagingData<AnimalData>>()
-    val showAnimalDetailsEvent = LiveEvent<String>()
-
-    val animals: Flow<PagingData<AnimalData>> = Pager(
-        PagingConfig(
-            enablePlaceholders = true,
-            pageSize = ANIMALS_PAGE_SIZE,
-            initialLoadSize = ANIMALS_PAGE_SIZE,
-            prefetchDistance = ANIMALS_PAGE_SIZE,
-        ),
-        pagingSourceFactory = { AnimalsPagingSource(getAnimalsUseCase, startingPage = 0) }
-    ).flow.cachedIn(viewModelScope)
+    val showAnimalDetailsEvent = LiveEvent<Int>()
 
     override fun initialize() {
         safeLaunch {
-            animals.collectLatest {
+            sharedAnimalFlowRepository.animals.collectLatest {
                 updateAnimalsEvent.fireEvent(it)
             }
         }
@@ -48,8 +33,8 @@ class AllAnimalsViewModel(
         }
     }
 
-    fun onAnimalItemClicked(animalData: AnimalData) {
-        showAnimalDetailsEvent.fireEvent(animalData.id)
+    fun onAnimalItemClicked(position: Int) {
+        showAnimalDetailsEvent.fireEvent(position)
     }
 
     companion object {
