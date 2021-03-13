@@ -37,6 +37,16 @@ class AllAnimalsFragment :
                     else -> false
                 }
             }
+            bottomAppBar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.more -> {
+                        val directions = AllAnimalsFragmentDirections.toSettingsFragment()
+                        navigateTo(directions)
+                        true
+                    }
+                    else -> false
+                }
+            }
         }
         with(viewModel) {
             viewState.observe(viewLifecycleOwner) {

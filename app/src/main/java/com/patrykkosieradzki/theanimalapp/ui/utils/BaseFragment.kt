@@ -18,14 +18,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.hadilq.liveevent.LiveEvent
 import com.patrykkosieradzki.theanimalapp.BR
 import com.patrykkosieradzki.theanimalapp.R
-import org.koin.androidx.viewmodel.ext.android.getViewModel
-import timber.log.Timber
 import kotlin.properties.Delegates
 import kotlin.reflect.KClass
+import org.koin.androidx.viewmodel.ext.android.getViewModel
+import timber.log.Timber
 
 @Suppress("TooManyFunctions")
 abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : ViewDataBinding>(
@@ -78,6 +79,17 @@ abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : 
     }
 
     open fun setupViews(view: View) {
+        setupToolbar(view)
+        setupBottomAppBar(view)
+    }
+
+    private fun setupToolbar(view: View) {
+        view.findViewById<MaterialToolbar>(R.id.toolbar)?.apply {
+
+        }
+    }
+
+    private fun setupBottomAppBar(view: View) {
         view.findViewById<BottomAppBar>(R.id.bottom_app_bar)?.apply {
             setNavigationOnClickListener {
                 val bottomNavDrawerFragment = BottomNavigationDrawerFragment()

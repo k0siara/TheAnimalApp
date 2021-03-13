@@ -9,4 +9,6 @@
     <string name="grid_to_list_switch">Switch to list</string>
     <string name="list_to_grid_switch_description">Switch between list and grid view</string>
 
+    <string name="settings">Settings</string>
+
 </resources>
