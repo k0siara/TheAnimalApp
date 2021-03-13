@@ -1,8 +1,8 @@
 package com.patrykkosieradzki.theanimalapp.ui.randomanimal
 
 import android.view.View
-import com.patrykkosieradzki.theanimalapp.ui.utils.BaseFragment
-import com.patrykkosieradzki.theanimalapp.ui.utils.loadWithPicasso
+import com.patrykkosieradzki.theanimalapp.utils.BaseFragment
+import com.patrykkosieradzki.theanimalapp.utils.extensions.loadWithPicasso
 import com.patrykkosieradzki.theanimalapp.R
 import com.patrykkosieradzki.theanimalapp.databinding.RandomAnimalFragmentBinding
 

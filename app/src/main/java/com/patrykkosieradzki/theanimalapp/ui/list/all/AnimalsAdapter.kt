@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.patrykkosieradzki.theanimalapp.databinding.AnimalItemBinding
 import com.patrykkosieradzki.theanimalapp.domain.model.AnimalData
 import com.patrykkosieradzki.theanimalapp.ui.list.AnimalDiffCallback
-import com.patrykkosieradzki.theanimalapp.ui.utils.setOnClick
+import com.patrykkosieradzki.theanimalapp.utils.setOnClick
 
 class AnimalsAdapter(
     private val onClick: (Int) -> Unit = {}

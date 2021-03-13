@@ -7,8 +7,8 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.patrykkosieradzki.theanimalapp.R
 import com.patrykkosieradzki.theanimalapp.databinding.AnimalDetailsFragmentBinding
-import com.patrykkosieradzki.theanimalapp.ui.utils.BaseFragment
-import com.patrykkosieradzki.theanimalapp.ui.utils.addPagerSnapHelper
+import com.patrykkosieradzki.theanimalapp.utils.BaseFragment
+import com.patrykkosieradzki.theanimalapp.utils.extensions.addPagerSnapHelper
 import kotlinx.coroutines.launch
 
 class AnimalDetailsFragment :
@@ -30,7 +30,6 @@ class AnimalDetailsFragment :
         with(binding) {
             onBackEvent = {
                 navigateBackWithResult(
-                    -1,
                     bundleOf("position" to layoutManager.findFirstVisibleItemPosition())
                 )
             }

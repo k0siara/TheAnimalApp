@@ -9,9 +9,6 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers
 import com.patrykkosieradzki.theanimalapp.R
-import com.patrykkosieradzki.theanimalapp.ui.utils.BaseFragment
-import com.patrykkosieradzki.theanimalapp.ui.utils.BaseViewModel
-import com.patrykkosieradzki.theanimalapp.ui.utils.ViewState
 import org.hamcrest.CoreMatchers.not
 import org.junit.rules.TestRule
 import org.junit.runners.model.Statement

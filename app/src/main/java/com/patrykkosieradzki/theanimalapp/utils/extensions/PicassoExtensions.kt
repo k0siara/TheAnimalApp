@@ -1,4 +1,4 @@
-package com.patrykkosieradzki.theanimalapp.ui.utils
+package com.patrykkosieradzki.theanimalapp.utils.extensions
 
 import android.widget.ImageView
 import com.squareup.picasso.Callback

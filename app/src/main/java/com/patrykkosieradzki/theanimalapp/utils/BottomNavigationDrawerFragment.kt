@@ -1,4 +1,4 @@
-package com.patrykkosieradzki.theanimalapp.ui.utils
+package com.patrykkosieradzki.theanimalapp.utils
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.patrykkosieradzki.theanimalapp.R
-import kotlinx.android.synthetic.main.bottom_navigation_drawer_fragment.*
+import kotlinx.android.synthetic.main.bottom_navigation_drawer_fragment.bottom_navigation_view
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.bottom_navigation_drawer_fragment, container, false)
     }
 

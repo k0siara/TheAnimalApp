@@ -4,7 +4,7 @@ import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.patrykkosieradzki.theanimalapp.R
 import com.patrykkosieradzki.theanimalapp.databinding.MaintenanceFragmentBinding
-import com.patrykkosieradzki.theanimalapp.ui.utils.BaseFragment
+import com.patrykkosieradzki.theanimalapp.utils.BaseFragment
 
 class MaintenanceFragment :
     BaseFragment<MaintenanceViewState, MaintenanceViewModel, MaintenanceFragmentBinding>(

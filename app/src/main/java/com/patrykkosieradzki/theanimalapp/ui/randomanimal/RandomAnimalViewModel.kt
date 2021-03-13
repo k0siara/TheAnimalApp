@@ -2,9 +2,9 @@ package com.patrykkosieradzki.theanimalapp.ui.randomanimal
 
 import com.hadilq.liveevent.LiveEvent
 import com.patrykkosieradzki.theanimalapp.domain.usecases.GetRandomAnimalUrlUseCase
-import com.patrykkosieradzki.theanimalapp.ui.utils.BaseViewModel
-import com.patrykkosieradzki.theanimalapp.ui.utils.ViewState
-import com.patrykkosieradzki.theanimalapp.ui.utils.fireEvent
+import com.patrykkosieradzki.theanimalapp.utils.BaseViewModel
+import com.patrykkosieradzki.theanimalapp.utils.ViewState
+import com.patrykkosieradzki.theanimalapp.utils.extensions.fireEvent
 
 class RandomAnimalViewModel(
     private val getRandomAnimalUrlUseCase: GetRandomAnimalUrlUseCase

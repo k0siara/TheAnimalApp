@@ -1,7 +1,8 @@
-package com.patrykkosieradzki.theanimalapp
+package com.patrykkosieradzki.theanimalapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.patrykkosieradzki.theanimalapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

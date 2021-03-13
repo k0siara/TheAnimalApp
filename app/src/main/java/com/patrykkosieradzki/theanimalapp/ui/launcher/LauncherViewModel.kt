@@ -3,9 +3,9 @@ package com.patrykkosieradzki.theanimalapp.ui.launcher
 import com.hadilq.liveevent.LiveEvent
 import com.patrykkosieradzki.theanimalapp.RemoteConfigManager
 import com.patrykkosieradzki.theanimalapp.ui.maintenance.MaintenanceData
-import com.patrykkosieradzki.theanimalapp.ui.utils.BaseViewModel
-import com.patrykkosieradzki.theanimalapp.ui.utils.ViewState
-import com.patrykkosieradzki.theanimalapp.ui.utils.fireEvent
+import com.patrykkosieradzki.theanimalapp.utils.BaseViewModel
+import com.patrykkosieradzki.theanimalapp.utils.ViewState
+import com.patrykkosieradzki.theanimalapp.utils.extensions.fireEvent
 
 class LauncherViewModel(
     private val remoteConfigManager: RemoteConfigManager

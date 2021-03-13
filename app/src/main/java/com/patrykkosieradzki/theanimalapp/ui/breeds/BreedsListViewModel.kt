@@ -1,7 +1,7 @@
 package com.patrykkosieradzki.theanimalapp.ui.breeds
 
-import com.patrykkosieradzki.theanimalapp.ui.utils.BaseViewModel
-import com.patrykkosieradzki.theanimalapp.ui.utils.ViewState
+import com.patrykkosieradzki.theanimalapp.utils.BaseViewModel
+import com.patrykkosieradzki.theanimalapp.utils.ViewState
 
 class BreedsListViewModel : BaseViewModel<BreedsListViewState>(
     initialState = BreedsListViewState(true)

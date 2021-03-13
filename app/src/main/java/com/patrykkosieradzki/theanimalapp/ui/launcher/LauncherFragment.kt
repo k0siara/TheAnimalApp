@@ -3,8 +3,8 @@ package com.patrykkosieradzki.theanimalapp.ui.launcher
 import android.view.View
 import com.patrykkosieradzki.theanimalapp.R
 import com.patrykkosieradzki.theanimalapp.databinding.LauncherFragmentBinding
-import com.patrykkosieradzki.theanimalapp.ui.utils.BaseFragment
-import com.patrykkosieradzki.theanimalapp.ui.utils.navigateTo
+import com.patrykkosieradzki.theanimalapp.utils.BaseFragment
+import com.patrykkosieradzki.theanimalapp.utils.extensions.navigateTo
 
 class LauncherFragment :
     BaseFragment<LauncherViewState, LauncherViewModel, LauncherFragmentBinding>(

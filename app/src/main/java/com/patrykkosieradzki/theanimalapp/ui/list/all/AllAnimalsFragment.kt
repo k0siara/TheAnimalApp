@@ -1,16 +1,17 @@
 package com.patrykkosieradzki.theanimalapp.ui.list.all
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.patrykkosieradzki.theanimalapp.R
 import com.patrykkosieradzki.theanimalapp.databinding.AllAnimalsFragmentBinding
-import com.patrykkosieradzki.theanimalapp.ui.utils.BaseFragment
-import com.patrykkosieradzki.theanimalapp.ui.utils.NavigationResult
-import com.patrykkosieradzki.theanimalapp.ui.utils.navigateTo
-import com.patrykkosieradzki.theanimalapp.ui.utils.removeItemDecorations
-import com.patrykkosieradzki.theanimalapp.ui.utils.valueNN
+import com.patrykkosieradzki.theanimalapp.utils.BaseFragment
+import com.patrykkosieradzki.theanimalapp.utils.NavigationResult
+import com.patrykkosieradzki.theanimalapp.utils.extensions.navigateTo
+import com.patrykkosieradzki.theanimalapp.utils.extensions.removeItemDecorations
+import com.patrykkosieradzki.theanimalapp.utils.extensions.valueNN
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -20,7 +21,7 @@ class AllAnimalsFragment :
     ),
     NavigationResult {
 
-    lateinit var adapter: AnimalsAdapter
+    private lateinit var adapter: AnimalsAdapter
 
     override fun setupViews(view: View) {
         super.setupViews(view)
@@ -28,15 +29,6 @@ class AllAnimalsFragment :
         adapter = AnimalsAdapter { viewModel.onAnimalItemClicked(it) }
         with(binding) {
             animalsRecyclerView.adapter = this@AllAnimalsFragment.adapter
-            toolbar.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.list_grid_switch -> {
-                        viewModel.onListGridSwitchClick()
-                        true
-                    }
-                    else -> false
-                }
-            }
             bottomAppBar.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.more -> {
@@ -61,6 +53,16 @@ class AllAnimalsFragment :
                 val directions = AllAnimalsFragmentDirections.toAnimalDetailsFragment(position)
                 navigateTo(directions)
             }
+        }
+    }
+
+    override fun onToolbarMenuItemClicked(it: MenuItem): Boolean {
+        return when (it.itemId) {
+            R.id.list_grid_switch -> {
+                viewModel.onListGridSwitchClick()
+                true
+            }
+            else -> false
         }
     }
 

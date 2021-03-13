@@ -1,4 +1,4 @@
-package com.patrykkosieradzki.theanimalapp.ui.utils
+package com.patrykkosieradzki.theanimalapp.utils.extensions
 
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat.getDrawable
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DividerItemDecoration.HORIZONTAL
 import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.patrykkosieradzki.theanimalapp.utils.GridSpacingItemDecoration
 
 fun RecyclerView.addVerticalSeparator(@DrawableRes separatorDrawable: Int) {
     getDrawable(context, separatorDrawable)?.let {

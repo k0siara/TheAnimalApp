@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hadilq.liveevent.LiveEvent
 import com.nhaarman.mockitokotlin2.mock
-import com.patrykkosieradzki.theanimalapp.ui.utils.ViewState
 import kotlin.reflect.full.isSubclassOf
 import org.koin.test.mock.MockProviderRule
 import org.mockito.Answers

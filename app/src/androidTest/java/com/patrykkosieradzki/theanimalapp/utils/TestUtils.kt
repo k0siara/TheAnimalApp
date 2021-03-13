@@ -12,9 +12,6 @@ import androidx.test.espresso.intent.Intents
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.patrykkosieradzki.theanimalapp.R
-import com.patrykkosieradzki.theanimalapp.ui.utils.BaseFragment
-import com.patrykkosieradzki.theanimalapp.ui.utils.BaseViewModel
-import com.patrykkosieradzki.theanimalapp.ui.utils.ViewState
 import org.koin.test.KoinTest
 
 fun fragmentTestRuleWithMocks(usesIntents: Boolean = false, stubbing: () -> Unit = {}) =

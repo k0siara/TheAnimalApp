@@ -1,38 +1,42 @@
-package com.patrykkosieradzki.theanimalapp.ui.utils
+package com.patrykkosieradzki.theanimalapp.utils
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.RelativeLayout
 import androidx.activity.addCallback
-import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
+import androidx.annotation.MenuRes
+import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomappbar.BottomAppBar
-import com.hadilq.liveevent.LiveEvent
 import com.patrykkosieradzki.theanimalapp.BR
 import com.patrykkosieradzki.theanimalapp.R
-import kotlin.properties.Delegates
-import kotlin.reflect.KClass
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import timber.log.Timber
+import kotlin.properties.Delegates
+import kotlin.reflect.KClass
 
 @Suppress("TooManyFunctions")
 abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : ViewDataBinding>(
     @LayoutRes private val layoutId: Int,
     vmKClass: KClass<VM>
 ) : Fragment() {
+
+    @get:StringRes
+    open val titleId: Int? = null
+    open val title: String? = null
+
+    @get:MenuRes
+    open val menuId: Int? = null
 
     protected lateinit var binding: VDB
 
@@ -85,9 +89,15 @@ abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : 
 
     private fun setupToolbar(view: View) {
         view.findViewById<MaterialToolbar>(R.id.toolbar)?.apply {
-
+            this@BaseFragment.titleId?.let { setTitle(it) }
+            this@BaseFragment.title?.let { title = it }
+            setOnMenuItemClickListener {
+                onToolbarMenuItemClicked(it)
+            }
         }
     }
+
+    open fun onToolbarMenuItemClicked(it: MenuItem): Boolean = true
 
     private fun setupBottomAppBar(view: View) {
         view.findViewById<BottomAppBar>(R.id.bottom_app_bar)?.apply {
@@ -96,24 +106,29 @@ abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : 
                 bottomNavDrawerFragment.show(parentFragmentManager, bottomNavDrawerFragment.tag)
             }
             setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.search -> {
-                        viewModel.onBottomAppBarSearchClicked()
-                        true
-                    }
-                    R.id.more -> {
-                        viewModel.onBottomAppBarMoreClicked()
-                        true
-                    }
-                    else -> false
-                }
+                onBottomAppBarMenuItemClicked(it)
             }
         }
     }
 
-    fun navigateBackWithResult(@IdRes destination: Int, bundle: Bundle): Boolean {
+    open fun onBottomAppBarMenuItemClicked(it: MenuItem): Boolean {
+        return when (it.itemId) {
+            R.id.search -> {
+                viewModel.onBottomAppBarSearchClicked()
+                true
+            }
+            R.id.more -> {
+                viewModel.onBottomAppBarMoreClicked()
+                true
+            }
+            else -> false
+        }
+    }
+
+    fun navigateBackWithResult(bundle: Bundle): Boolean {
         val childFragmentManager =
-            requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host)?.childFragmentManager
+            requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host)
+                ?.childFragmentManager
         var backStackListener: FragmentManager.OnBackStackChangedListener by Delegates.notNull()
         backStackListener = FragmentManager.OnBackStackChangedListener {
             (childFragmentManager?.fragments?.get(0) as? NavigationResult)?.onNavigationResult(
@@ -122,11 +137,7 @@ abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : 
             childFragmentManager?.removeOnBackStackChangedListener(backStackListener)
         }
         childFragmentManager?.addOnBackStackChangedListener(backStackListener)
-        val backStackPopped = if (destination == -1) {
-            findNavController().popBackStack()
-        } else {
-            findNavController().popBackStack(destination, true)
-        }
+        val backStackPopped = findNavController().popBackStack()
         if (!backStackPopped) {
             childFragmentManager?.removeOnBackStackChangedListener(backStackListener)
         }
@@ -138,24 +149,3 @@ interface ViewState {
     val inProgress: Boolean
     fun toSuccess(): ViewState
 }
-
-inline val <T> MutableLiveData<T>.readOnly: LiveData<T>
-    get() = this
-
-inline val <T> LiveData<T>.valueNN
-    get() = this.value!!
-
-fun <T> LiveEvent<T>.fireEvent(event: T) {
-    this.value = event
-}
-
-fun LiveEvent<Unit>.fireEvent() {
-    this.value = Unit
-}
-
-fun Fragment.navigateTo(directions: NavDirections) {
-    findNavController().navigate(directions)
-}
-
-val Fragment.appCompatActivity: AppCompatActivity
-    get() = requireActivity() as AppCompatActivity
