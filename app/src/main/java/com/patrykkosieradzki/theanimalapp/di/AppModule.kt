@@ -1,5 +1,8 @@
 package com.patrykkosieradzki.theanimalapp.di
 
+import android.content.SharedPreferences
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
 import com.patrykkosieradzki.theanimalapp.RemoteConfigManager
 import com.patrykkosieradzki.theanimalapp.RemoteConfigManagerImpl
 import com.patrykkosieradzki.theanimalapp.TheAnimalAppConfiguration
@@ -16,6 +19,7 @@ import com.patrykkosieradzki.theanimalapp.ui.list.details.AnimalDetailsViewModel
 import com.patrykkosieradzki.theanimalapp.ui.maintenance.MaintenanceViewModel
 import com.patrykkosieradzki.theanimalapp.ui.randomanimal.RandomAnimalViewModel
 import com.patrykkosieradzki.theanimalapp.ui.settings.SettingsViewModel
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
@@ -25,6 +29,17 @@ val appModule = module {
     single<AppConfiguration> {
         TheAnimalAppConfiguration()
     }
+
+    single {
+        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+        return@single EncryptedSharedPreferences.create(
+            "secret_shared_prefs",
+            masterKeyAlias,
+            androidContext(),
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    } bind SharedPreferences::class
 
     single {
         RemoteConfigManagerImpl(

@@ -1,14 +1,14 @@
 package com.patrykkosieradzki.theanimalapp.ui.list.all
 
-import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.patrykkosieradzki.theanimalapp.R
 import com.patrykkosieradzki.theanimalapp.databinding.AllAnimalsFragmentBinding
+import com.patrykkosieradzki.theanimalapp.utils.BackNavigationListener
+import com.patrykkosieradzki.theanimalapp.utils.BackNavigationResult
 import com.patrykkosieradzki.theanimalapp.utils.BaseFragment
-import com.patrykkosieradzki.theanimalapp.utils.NavigationResult
 import com.patrykkosieradzki.theanimalapp.utils.extensions.navigateTo
 import com.patrykkosieradzki.theanimalapp.utils.extensions.removeItemDecorations
 import com.patrykkosieradzki.theanimalapp.utils.extensions.valueNN
@@ -18,7 +18,7 @@ class AllAnimalsFragment :
     BaseFragment<AllAnimalsViewState, AllAnimalsViewModel, AllAnimalsFragmentBinding>(
         R.layout.all_animals_fragment, AllAnimalsViewModel::class
     ),
-    NavigationResult {
+    BackNavigationListener {
 
     private lateinit var adapter: AnimalsAdapter
 
@@ -86,10 +86,10 @@ class AllAnimalsFragment :
         }
     }
 
-    override fun onNavigationResult(result: Bundle) {
+    override fun onNavigationResult(result: BackNavigationResult) {
         binding.animalsRecyclerView.run {
             post {
-                layoutManager?.scrollToPosition(result["position"] as Int)
+                layoutManager?.scrollToPosition(result.bundle["position"] as Int)
             }
         }
     }

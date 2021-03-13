@@ -145,8 +145,8 @@ abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : 
                 ?.childFragmentManager
         var backStackListener: FragmentManager.OnBackStackChangedListener by Delegates.notNull()
         backStackListener = FragmentManager.OnBackStackChangedListener {
-            (childFragmentManager?.fragments?.get(0) as? NavigationResult)?.onNavigationResult(
-                bundle
+            (childFragmentManager?.fragments?.get(0) as? BackNavigationListener)?.onNavigationResult(
+                BackNavigationResult(bundle)
             )
             childFragmentManager?.removeOnBackStackChangedListener(backStackListener)
         }

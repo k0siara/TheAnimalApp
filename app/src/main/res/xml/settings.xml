@@ -4,6 +4,16 @@
         app:key="notifications"
         app:title="Enable message notifications"/>
 
+    <ListPreference
+        app:dialogTitle="@string/theme"
+        app:dialogMessage="@string/change_theme"
+        app:title="@string/theme"
+        app:summary="@string/change_theme"
+        app:useSimpleSummaryProvider="true"
+        app:entries="@array/themes_list_preference"
+        app:entryValues="@array/themes_list_preference_values"
+        app:key="theme_preference"/>
+
     <Preference
         app:key="feedback"
         app:title="Send feedback"

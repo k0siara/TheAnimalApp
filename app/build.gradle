@@ -200,6 +200,8 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     implementation "androidx.preference:preference-ktx:1.1.1"
+
+    implementation "androidx.security:security-crypto:1.0.0-rc04"
 }
 
 allOpen {
