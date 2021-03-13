@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.patrykkosieradzki.theanimalapp.ui.animaldetails.AnimalDetailsViewModel" />
+            type="com.patrykkosieradzki.theanimalapp.ui.list.details.AnimalDetailsViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

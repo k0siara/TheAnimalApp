@@ -1,10 +1,10 @@
-package com.patrykkosieradzki.theanimalapp.ui.allanimals
+package com.patrykkosieradzki.theanimalapp.ui.list.all
 
 import androidx.paging.PagingData
 import com.hadilq.liveevent.LiveEvent
 import com.patrykkosieradzki.theanimalapp.domain.model.AnimalData
-import com.patrykkosieradzki.theanimalapp.ui.allanimals.RecyclerViewMode.GRID
-import com.patrykkosieradzki.theanimalapp.ui.allanimals.RecyclerViewMode.LIST
+import com.patrykkosieradzki.theanimalapp.ui.list.all.RecyclerViewMode.GRID
+import com.patrykkosieradzki.theanimalapp.ui.list.all.RecyclerViewMode.LIST
 import com.patrykkosieradzki.theanimalapp.ui.list.SharedAnimalFlowRepository
 import com.patrykkosieradzki.theanimalapp.ui.utils.BaseViewModel
 import com.patrykkosieradzki.theanimalapp.ui.utils.ViewState

@@ -14,6 +14,7 @@ interface RemoteConfigManager {
         onCompleteCallback: (Boolean) -> Unit,
         onFailureCallback: (Exception) -> Unit
     )
+
     val maintenanceEnabled: Boolean
     val maintenanceTitle: String
     val maintenanceDescription: String

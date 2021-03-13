@@ -8,8 +8,8 @@ import com.patrykkosieradzki.theanimalapp.domain.usecases.GetAnimalsUseCase
 import com.patrykkosieradzki.theanimalapp.domain.usecases.GetAnimalsUseCaseImpl
 import com.patrykkosieradzki.theanimalapp.domain.usecases.GetRandomAnimalUrlUseCase
 import com.patrykkosieradzki.theanimalapp.domain.usecases.GetRandomAnimalUrlUseCaseImpl
-import com.patrykkosieradzki.theanimalapp.ui.allanimals.AllAnimalsViewModel
-import com.patrykkosieradzki.theanimalapp.ui.animaldetails.AnimalDetailsViewModel
+import com.patrykkosieradzki.theanimalapp.ui.list.all.AllAnimalsViewModel
+import com.patrykkosieradzki.theanimalapp.ui.list.details.AnimalDetailsViewModel
 import com.patrykkosieradzki.theanimalapp.ui.launcher.LauncherViewModel
 import com.patrykkosieradzki.theanimalapp.ui.list.SharedAnimalFlowRepository
 import com.patrykkosieradzki.theanimalapp.ui.list.SharedPagingAnimalFlowRepository

@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/allAnimalsFragment"
         tools:layout="@layout/all_animals_fragment"
-        android:name="com.patrykkosieradzki.theanimalapp.ui.allanimals.AllAnimalsFragment"
+        android:name="com.patrykkosieradzki.theanimalapp.ui.list.all.AllAnimalsFragment"
         android:label="AllAnimalsFragment" >
         <action
             android:id="@+id/to_animalDetailsFragment"
@@ -54,7 +54,7 @@
     <fragment
         android:id="@+id/animalDetailsFragment"
         tools:layout="@layout/animal_details_fragment"
-        android:name="com.patrykkosieradzki.theanimalapp.ui.animaldetails.AnimalDetailsFragment"
+        android:name="com.patrykkosieradzki.theanimalapp.ui.list.details.AnimalDetailsFragment"
         android:label="AnimalDetailsFragment" >
         <argument
             android:name="position"

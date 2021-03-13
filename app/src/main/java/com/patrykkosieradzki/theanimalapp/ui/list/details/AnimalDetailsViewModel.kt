@@ -1,4 +1,4 @@
-package com.patrykkosieradzki.theanimalapp.ui.animaldetails
+package com.patrykkosieradzki.theanimalapp.ui.list.details
 
 import androidx.paging.PagingData
 import com.hadilq.liveevent.LiveEvent

@@ -1,4 +1,4 @@
-package com.patrykkosieradzki.theanimalapp.ui.animaldetails
+package com.patrykkosieradzki.theanimalapp.ui.list.details
 
 import android.view.View
 import androidx.core.os.bundleOf
@@ -7,7 +7,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.patrykkosieradzki.theanimalapp.R
 import com.patrykkosieradzki.theanimalapp.databinding.AnimalDetailsFragmentBinding
-import com.patrykkosieradzki.theanimalapp.ui.allanimals.AnimalDiffCallback
 import com.patrykkosieradzki.theanimalapp.ui.utils.BaseFragment
 import com.patrykkosieradzki.theanimalapp.ui.utils.addPagerSnapHelper
 import kotlinx.coroutines.launch
@@ -27,7 +26,7 @@ class AnimalDetailsFragment :
 
     override fun setupViews(view: View) {
         super.setupViews(view)
-        adapter = AnimalDetailsAdapter(AnimalDiffCallback())
+        adapter = AnimalDetailsAdapter()
         with(binding) {
             onBackEvent = {
                 navigateBackWithResult(

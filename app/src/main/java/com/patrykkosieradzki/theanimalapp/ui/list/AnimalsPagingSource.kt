@@ -1,4 +1,4 @@
-package com.patrykkosieradzki.theanimalapp.ui.allanimals
+package com.patrykkosieradzki.theanimalapp.ui.list
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

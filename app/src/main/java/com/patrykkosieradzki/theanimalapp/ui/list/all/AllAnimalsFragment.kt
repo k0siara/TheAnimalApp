@@ -1,4 +1,4 @@
-package com.patrykkosieradzki.theanimalapp.ui.allanimals
+package com.patrykkosieradzki.theanimalapp.ui.list.all
 
 import android.os.Bundle
 import android.view.View
@@ -6,8 +6,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.patrykkosieradzki.theanimalapp.R
 import com.patrykkosieradzki.theanimalapp.databinding.AllAnimalsFragmentBinding
-import com.patrykkosieradzki.theanimalapp.ui.allanimals.RecyclerViewMode.GRID
-import com.patrykkosieradzki.theanimalapp.ui.allanimals.RecyclerViewMode.LIST
 import com.patrykkosieradzki.theanimalapp.ui.utils.BaseFragment
 import com.patrykkosieradzki.theanimalapp.ui.utils.NavigationResult
 import com.patrykkosieradzki.theanimalapp.ui.utils.navigateTo
@@ -27,7 +25,7 @@ class AllAnimalsFragment :
     override fun setupViews(view: View) {
         super.setupViews(view)
         onBackEvent = { requireActivity().moveTaskToBack(true) }
-        adapter = AnimalsAdapter(AnimalDiffCallback()) { viewModel.onAnimalItemClicked(it) }
+        adapter = AnimalsAdapter { viewModel.onAnimalItemClicked(it) }
         with(binding) {
             animalsRecyclerView.adapter = this@AllAnimalsFragment.adapter
             toolbar.setOnMenuItemClickListener {
@@ -61,14 +59,14 @@ class AllAnimalsFragment :
             animalsRecyclerView.apply {
                 removeItemDecorations()
                 when (viewModel.viewState.valueNN.recyclerViewMode) {
-                    LIST -> {
+                    RecyclerViewMode.LIST -> {
                         (layoutManager as GridLayoutManager).spanCount = 1
                         toolbar.menu.findItem(R.id.list_grid_switch).apply {
                             title = getString(R.string.list_to_grid_switch)
                             setIcon(R.drawable.ic_grid)
                         }
                     }
-                    GRID -> {
+                    RecyclerViewMode.GRID -> {
                         (layoutManager as GridLayoutManager).spanCount = 2
                         toolbar.menu.findItem(R.id.list_grid_switch).apply {
                             title = getString(R.string.grid_to_list_switch)

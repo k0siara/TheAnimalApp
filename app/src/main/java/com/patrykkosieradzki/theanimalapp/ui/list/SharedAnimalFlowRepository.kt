@@ -6,8 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.patrykkosieradzki.theanimalapp.domain.model.AnimalData
 import com.patrykkosieradzki.theanimalapp.domain.usecases.GetAnimalsUseCase
-import com.patrykkosieradzki.theanimalapp.ui.allanimals.AllAnimalsViewModel
-import com.patrykkosieradzki.theanimalapp.ui.allanimals.AnimalsPagingSource
+import com.patrykkosieradzki.theanimalapp.ui.list.all.AllAnimalsViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 
@@ -28,5 +27,4 @@ class SharedPagingAnimalFlowRepository(
         ),
         pagingSourceFactory = { AnimalsPagingSource(getAnimalsUseCase, startingPage = 0) }
     ).flow.cachedIn(GlobalScope)
-
 }
