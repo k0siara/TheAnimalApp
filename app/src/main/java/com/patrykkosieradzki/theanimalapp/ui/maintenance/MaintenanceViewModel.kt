@@ -1,16 +1,19 @@
 package com.patrykkosieradzki.theanimalapp.ui.maintenance
 
+import com.patrykkosieradzki.theanimalapp.RemoteConfigManager
 import com.patrykkosieradzki.theanimalapp.utils.BaseViewModel
 import com.patrykkosieradzki.theanimalapp.utils.ViewState
 
-class MaintenanceViewModel : BaseViewModel<MaintenanceViewState>(
+class MaintenanceViewModel(
+    private val remoteConfigManager: RemoteConfigManager
+) : BaseViewModel<MaintenanceViewState>(
     initialState = MaintenanceViewState()
 ) {
-    fun setData(maintenanceData: MaintenanceData) {
+    override fun initialize() {
         updateViewState {
             it.copy(
-                title = maintenanceData.title,
-                description = maintenanceData.description
+                title = remoteConfigManager.maintenanceTitle,
+                description = remoteConfigManager.maintenanceDescription
             )
         }
     }

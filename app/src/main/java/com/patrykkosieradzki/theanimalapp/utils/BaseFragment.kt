@@ -85,6 +85,20 @@ abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : 
     open fun setupViews(view: View) {
         setupToolbar(view)
         setupBottomAppBar(view)
+        viewModel.navigationCommandEvent.observe(viewLifecycleOwner) {
+            when (it) {
+                is NavigationCommand.To -> {
+                    findNavController().navigate(it.directions)
+                }
+                is NavigationCommand.Back -> {
+                    onBackEvent.invoke()
+                }
+                is NavigationCommand.BackWithArgs -> {
+                    navigateBackWithArgs(it.bundle)
+                }
+                else -> throw IllegalStateException("Unknown navigation command")
+            }
+        }
     }
 
     private fun setupToolbar(view: View) {
@@ -125,7 +139,7 @@ abstract class BaseFragment<STATE : ViewState, VM : BaseViewModel<STATE>, VDB : 
         }
     }
 
-    fun navigateBackWithResult(bundle: Bundle): Boolean {
+    fun navigateBackWithArgs(bundle: Bundle): Boolean {
         val childFragmentManager =
             requireActivity().supportFragmentManager.findFragmentById(R.id.nav_host)
                 ?.childFragmentManager

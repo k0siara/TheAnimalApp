@@ -57,7 +57,9 @@ val appModule = module {
     }
 
     viewModel {
-        MaintenanceViewModel()
+        MaintenanceViewModel(
+            remoteConfigManager = get()
+        )
     }
 
     viewModel {

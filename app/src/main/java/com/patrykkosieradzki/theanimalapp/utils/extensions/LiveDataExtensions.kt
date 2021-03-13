@@ -4,6 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.hadilq.liveevent.LiveEvent
 
+fun <T> MutableLiveData<T>.fireChange(t: T) {
+    value = t
+}
+
 inline val <T> MutableLiveData<T>.readOnly: LiveData<T>
     get() = this
 

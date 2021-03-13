@@ -13,7 +13,6 @@ import com.patrykkosieradzki.theanimalapp.utils.extensions.navigateTo
 import com.patrykkosieradzki.theanimalapp.utils.extensions.removeItemDecorations
 import com.patrykkosieradzki.theanimalapp.utils.extensions.valueNN
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class AllAnimalsFragment :
     BaseFragment<AllAnimalsViewState, AllAnimalsViewModel, AllAnimalsFragmentBinding>(
@@ -44,14 +43,10 @@ class AllAnimalsFragment :
             viewState.observe(viewLifecycleOwner) {
                 switchRecyclerViewMode()
             }
-            updateAnimalsEvent.observe(viewLifecycleOwner) {
+            collectedAnimalsEvent.observe(viewLifecycleOwner) {
                 lifecycleScope.launch {
                     adapter.submitData(it)
                 }
-            }
-            showAnimalDetailsEvent.observe(viewLifecycleOwner) { position ->
-                val directions = AllAnimalsFragmentDirections.toAnimalDetailsFragment(position)
-                navigateTo(directions)
             }
         }
     }
@@ -92,8 +87,7 @@ class AllAnimalsFragment :
     }
 
     override fun onNavigationResult(result: Bundle) {
-        Timber.d("Back navigation args received ${result["position"]}")
-        with(binding.animalsRecyclerView) {
+        binding.animalsRecyclerView.run {
             post {
                 layoutManager?.scrollToPosition(result["position"] as Int)
             }

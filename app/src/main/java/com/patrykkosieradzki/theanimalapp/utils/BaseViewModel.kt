@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavDirections
 import com.hadilq.liveevent.LiveEvent
 import com.patrykkosieradzki.theanimalapp.utils.extensions.fireEvent
 import com.patrykkosieradzki.theanimalapp.utils.extensions.readOnly
@@ -28,6 +29,7 @@ abstract class BaseViewModel<STATE : ViewState>(
         get() = _viewState.value === initialState
     protected val state: STATE
         get() = viewState.valueNN
+    val navigationCommandEvent = LiveEvent<NavigationCommand>()
 
     protected val handler = CoroutineExceptionHandler { _, exception ->
         Timber.e(exception, COROUTINE_EXCEPTION_HANDLER_MESSAGE)
@@ -63,6 +65,10 @@ abstract class BaseViewModel<STATE : ViewState>(
 
     protected fun safeLaunch(block: suspend CoroutineScope.() -> Unit) {
         viewModelScope.launch(handler, block = block)
+    }
+
+    protected fun navigateTo(navDirections: NavDirections) {
+        navigationCommandEvent.fireEvent(NavigationCommand.To(navDirections))
     }
 
     companion object {

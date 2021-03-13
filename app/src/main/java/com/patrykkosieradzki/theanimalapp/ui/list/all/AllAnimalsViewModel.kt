@@ -1,14 +1,14 @@
 package com.patrykkosieradzki.theanimalapp.ui.list.all
 
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
-import com.hadilq.liveevent.LiveEvent
 import com.patrykkosieradzki.theanimalapp.domain.model.AnimalData
 import com.patrykkosieradzki.theanimalapp.ui.list.SharedAnimalFlowRepository
 import com.patrykkosieradzki.theanimalapp.ui.list.all.RecyclerViewMode.GRID
 import com.patrykkosieradzki.theanimalapp.ui.list.all.RecyclerViewMode.LIST
 import com.patrykkosieradzki.theanimalapp.utils.BaseViewModel
 import com.patrykkosieradzki.theanimalapp.utils.ViewState
-import com.patrykkosieradzki.theanimalapp.utils.extensions.fireEvent
+import com.patrykkosieradzki.theanimalapp.utils.extensions.fireChange
 import kotlinx.coroutines.flow.collectLatest
 
 class AllAnimalsViewModel(
@@ -16,13 +16,12 @@ class AllAnimalsViewModel(
 ) : BaseViewModel<AllAnimalsViewState>(
     initialState = AllAnimalsViewState(inProgress = true)
 ) {
-    val updateAnimalsEvent = LiveEvent<PagingData<AnimalData>>()
-    val showAnimalDetailsEvent = LiveEvent<Int>()
+    val collectedAnimalsEvent = MutableLiveData<PagingData<AnimalData>>()
 
     override fun initialize() {
         safeLaunch {
             sharedAnimalFlowRepository.animals.collectLatest {
-                updateAnimalsEvent.fireEvent(it)
+                collectedAnimalsEvent.fireChange(it)
             }
         }
     }
@@ -34,7 +33,7 @@ class AllAnimalsViewModel(
     }
 
     fun onAnimalItemClicked(position: Int) {
-        showAnimalDetailsEvent.fireEvent(position)
+        navigateTo(AllAnimalsFragmentDirections.toAnimalDetailsFragment(position))
     }
 
     companion object {

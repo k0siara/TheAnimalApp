@@ -29,7 +29,7 @@ class AnimalDetailsFragment :
         adapter = AnimalDetailsAdapter()
         with(binding) {
             onBackEvent = {
-                navigateBackWithResult(
+                navigateBackWithArgs(
                     bundleOf("position" to layoutManager.findFirstVisibleItemPosition())
                 )
             }
@@ -45,7 +45,7 @@ class AnimalDetailsFragment :
             }
         }
         with(viewModel) {
-            updateAnimalsEvent.observe(viewLifecycleOwner) {
+            collectedAnimals.observe(viewLifecycleOwner) {
                 lifecycleScope.launch {
                     adapter.submitData(it)
                 }

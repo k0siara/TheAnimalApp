@@ -1,12 +1,12 @@
 package com.patrykkosieradzki.theanimalapp.ui.list.details
 
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
-import com.hadilq.liveevent.LiveEvent
 import com.patrykkosieradzki.theanimalapp.domain.model.AnimalData
 import com.patrykkosieradzki.theanimalapp.ui.list.SharedAnimalFlowRepository
 import com.patrykkosieradzki.theanimalapp.utils.BaseViewModel
 import com.patrykkosieradzki.theanimalapp.utils.ViewState
-import com.patrykkosieradzki.theanimalapp.utils.extensions.fireEvent
+import com.patrykkosieradzki.theanimalapp.utils.extensions.fireChange
 import kotlinx.coroutines.flow.collectLatest
 
 class AnimalDetailsViewModel(
@@ -14,13 +14,13 @@ class AnimalDetailsViewModel(
 ) : BaseViewModel<AnimalDetailsViewState>(
     initialState = AnimalDetailsViewState(inProgress = true)
 ) {
-    val updateAnimalsEvent = LiveEvent<PagingData<AnimalData>>()
+    val collectedAnimals = MutableLiveData<PagingData<AnimalData>>()
 
     override fun initialize() {
         super.initialize()
         safeLaunch {
             sharedAnimalFlowRepository.animals.collectLatest {
-                updateAnimalsEvent.fireEvent(it)
+                collectedAnimals.fireChange(it)
             }
         }
     }
