@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <SwitchPreferenceCompat
-        app:key="notifications"
-        app:title="Enable message notifications"/>
+        android:key="notifications"
+        android:title="Enable message notifications"/>
 
     <ListPreference
-        app:dialogTitle="@string/theme"
-        app:dialogMessage="@string/change_theme"
-        app:title="@string/theme"
-        app:summary="@string/change_theme"
+        android:defaultValue="1"
+        android:key="theme_preference"
+        android:title="@string/theme"
+        android:summary="@string/change_theme"
         app:useSimpleSummaryProvider="true"
-        app:entries="@array/themes_list_preference"
-        app:entryValues="@array/themes_list_preference_values"
-        app:key="theme_preference"/>
+        android:entries="@array/themes_list_preference"
+        android:entryValues="@array/themes_list_preference_values"/>
 
     <Preference
-        app:key="feedback"
-        app:title="Send feedback"
-        app:summary="Report technical issues or suggest new features"/>
+        android:key="feedback"
+        android:title="Send feedback"
+        android:summary="Report technical issues or suggest new features"/>
 </PreferenceScreen>

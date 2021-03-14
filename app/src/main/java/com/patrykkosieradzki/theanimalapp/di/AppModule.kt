@@ -41,6 +41,19 @@ val appModule = module {
         )
     } bind SharedPreferences::class
 
+//    factory {
+//        SecureSimpleDataSerializer(
+//            crypto = get()
+//        )
+//    }
+
+//    single {
+//        androidContext().createDataStore(
+//            fileName = "AndroidDataStore.pb",
+//            serializer = get<SecureSimpleDataSerializer>()
+//        )
+//    }
+
     single {
         RemoteConfigManagerImpl(
             appConfiguration = get()
