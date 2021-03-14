@@ -48,8 +48,6 @@ class MaintenanceFragmentRobot :
     FragmentScenarioRobot<MaintenanceViewState, MaintenanceViewModel>() {
 
     fun startFragment() {
-        startFragment(
-            MaintenanceFragmentArgs(MaintenanceData("", "")).toBundle()
-        ) { MaintenanceFragment() }
+        startFragment { MaintenanceFragment() }
     }
 }
